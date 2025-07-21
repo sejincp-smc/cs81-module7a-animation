@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading Animation Simulator</title>
+</head>
+<body style="font-family: monospace; text-align: center; padding-top: 100px; background-color: #f4f4f4;">
+
+  <div id="loader" style="font-size: 2rem; margin-bottom: 20px;">Loading...</div>
+  <div id="status">Please wait</div>
+
+  <script>
+    // function for running the loading animation
+    function runLoadingAnimation() {
+      const loader = document.getElementById("loader"); // it gets the loader element
+      const status = document.getElementById("status"); // it gets the status message element
+      // frames for loading animation
+      const frames = ["⏳", "⌛", ".", "..", "..."];
+      let index = 0; // current index of the frame in the animation
+      let cycleCount = 0; // how many cycles have completed
+      const maxCycles = 10; // set the max cycles
+
+      // setInterval runs the cycle that updates the frames every 500ms
+      const interval = setInterval(() => {
+        loader.textContent = frames[index % frames.length]; // it changes loader content
+        index++; // to the next frame
+        if (index % frames.length === 0) {
+          cycleCount++;
+        }
+        if (cycleCount >= maxCycles) { // when the maxCycles reaches to 10
+          clearInterval(interval); // It stops the loop (set interval runs the loop, needs to be stopped.)
+          loader.textContent = "✅"; // Showing the loading is complete
+          status.textContent = "Done!"; // Complete message
+        }
+      }, 500);
+    }
+    // Running the loading animation when the pages loads
+    runLoadingAnimation();
+  </script>
+
+</body>
+</html>
